@@ -7,7 +7,7 @@ class AudioProvider extends ChangeNotifier {
   List<Song> _playlist = [];
   int _currentIndex = 0;
 
-  // ✅ Add a getter for playlist
+  //Add a getter for playlist
   List<Song> get playlist => _playlist;  
 
   void setPlaylist(List<Song> songs) {

@@ -4,6 +4,7 @@ import '../services/api_service.dart';
 import '../models/song_model.dart';
 import '../providers/audio_provider.dart';
 import '../widgets/bottom_player.dart';
+import 'search_screen.dart'; // ✅ Import SearchScreen
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -11,7 +12,21 @@ class HomeScreen extends StatelessWidget {
     final audioProvider = Provider.of<AudioProvider>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Music App")),
+      appBar: AppBar(
+        title: const Text("Enchanted"),
+        actions: [
+          // 🔍 Search Button
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SearchScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: FutureBuilder(
         future: ApiService.fetchSongs(),
         builder: (context, snapshot) {
@@ -19,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return const Center(child: Text("Error loading songs"));
+            return Center(child: Text("Error loading songs: ${snapshot.error}"));
           }
 
           final songs = snapshot.data as List<Song>;
@@ -41,7 +56,7 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       // Use persistent bottom sheet instead of bottomNavigationBar
-      bottomSheet: BottomPlayer(),
+       bottomSheet: BottomPlayer(),
     );
   }
 }
