@@ -26,6 +26,8 @@ class HomeScreen extends StatelessWidget {
           audioProvider.setPlaylist(songs);
 
           return ListView.builder(
+            // Add padding at bottom to prevent list items from being hidden behind player
+            padding: const EdgeInsets.only(bottom: 90),
             itemCount: songs.length,
             itemBuilder: (context, index) {
               return ListTile(
@@ -38,7 +40,8 @@ class HomeScreen extends StatelessWidget {
           );
         },
       ),
-      bottomNavigationBar: BottomPlayer(),
+      // Use persistent bottom sheet instead of bottomNavigationBar
+      bottomSheet: BottomPlayer(),
     );
   }
 }
