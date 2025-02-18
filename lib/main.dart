@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Music App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: HomeScreen(),
     );
